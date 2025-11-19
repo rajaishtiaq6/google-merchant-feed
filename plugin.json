@@ -5,7 +5,7 @@
     "provider": "Shaqi\\GoogleMerchantFeed\\Providers\\GoogleMerchantFeedServiceProvider",
     "author": "Ishtiaq Ahmed",
     "url": "https://www.upwork.com/freelancers/~013d0214b96ae5f4a3",
-    "version": "1.0.0",
-    "description": "Generates Google Shopping XML feed for Botble. 🚀",
+    "version": "1.1.0",
+    "description": "Generates Google Shopping XML feed for Botble with robust error handling and performance optimization. 🚀",
     "require": ["botble/ecommerce"]
 }

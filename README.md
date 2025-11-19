@@ -1,8 +1,9 @@
 # Google Merchant Feed Plugin for Botble CMS
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Botble](https://img.shields.io/badge/Botble-Compatible-orange.svg)
+![Stability](https://img.shields.io/badge/stability-stable-green.svg)
 
 A powerful and easy-to-use plugin that automatically generates Google Shopping XML feeds for your Botble E-commerce store. Seamlessly integrate your product catalog with Google Merchant Center to boost your online visibility and drive more sales through Google Shopping ads.
 
@@ -12,6 +13,7 @@ The **Shaqi Google Merchant Feed** plugin creates a fully compliant XML feed tha
 
 ## ✨ Features
 
+### Core Features
 - **Automatic XML Feed Generation** - Generates Google Shopping compliant XML feed automatically
 - **Real-time Product Sync** - Always displays up-to-date product information from your store
 - **Comprehensive Product Data** - Includes product title, description, price, sale price, brand, categories, images, and availability
@@ -25,6 +27,26 @@ The **Shaqi Google Merchant Feed** plugin creates a fully compliant XML feed tha
 - **Image Integration** - Automatically includes product images in the feed
 - **Admin Settings Panel** - User-friendly settings interface in the admin dashboard
 - **No External Dependencies** - Works entirely within your Botble installation
+
+### 🛡️ Reliability & Error Handling (New in v1.1.0)
+- **Comprehensive Error Handling** - Robust error handling prevents feed generation failures
+- **Graceful Degradation** - Continues processing even if individual products have issues
+- **Smart Fallbacks** - Automatic fallbacks for missing data (images, descriptions, brands, etc.)
+- **Production-Ready** - Thoroughly tested error scenarios and edge cases
+- **Detailed Logging** - Comprehensive error logging for easy troubleshooting
+- **Data Validation** - Validates all required fields before processing
+
+### ⚡ Performance & Optimization (New in v1.1.0)
+- **Eager Loading** - Optimized database queries with relationship eager loading
+- **N+1 Prevention** - Eliminates N+1 query problems for better performance
+- **Efficient Processing** - Optimized feed generation for large product catalogs
+- **Memory Efficient** - Handles large product sets without memory issues
+
+### 🔒 Security & Data Integrity (New in v1.1.0)
+- **XML Injection Protection** - Protected against XML injection attacks
+- **Proper Data Escaping** - All data properly escaped for XML compliance
+- **UTF-8 Encoding** - Full UTF-8 support for international characters
+- **Safe Error Messages** - Error messages don't expose sensitive information
 
 ## 📦 Requirements
 
@@ -185,7 +207,76 @@ SOFTWARE.
 
 ## 📝 Changelog
 
-### Version 1.0.0 (Current)
+### Version 1.1.0 (2025-11-19) - Major Stability Update
+
+#### 🛡️ Error Handling & Reliability
+- ✅ **Comprehensive Error Handling** - Added try-catch blocks throughout feed generation
+- ✅ **Graceful Degradation** - Feed continues processing even if individual products fail
+- ✅ **Currency Validation** - Validates application currency is configured before generation
+- ✅ **XML Generation Safety** - Protected XML initialization and output with error handling
+- ✅ **Product Validation** - Validates required product fields before adding to feed
+- ✅ **Relationship Validation** - Checks brand and category relationships exist before accessing
+
+#### 🚀 Performance Improvements
+- ✅ **Eager Loading** - Added eager loading for product relationships (slugable, brand, categories)
+- ✅ **N+1 Query Prevention** - Eliminated N+1 query problem for better performance
+- ✅ **Optimized Database Queries** - More efficient product data retrieval
+
+#### 🔒 Security & Data Integrity
+- ✅ **Enhanced XML Escaping** - Improved XML special character handling with ENT_XML1 | ENT_QUOTES
+- ✅ **UTF-8 Encoding** - Proper UTF-8 encoding in XML declaration and headers
+- ✅ **XML Injection Prevention** - Protected against XML injection attacks
+- ✅ **Safe Data Output** - All user data properly escaped before output
+
+#### 🎯 Robust Fallback Mechanisms
+- ✅ **Product URL Fallback** - Falls back to homepage if product URL generation fails
+- ✅ **Brand Fallback** - Uses "Unknown" if brand is missing or deleted
+- ✅ **Description Fallback** - Uses product name if description is empty
+- ✅ **Image Fallback** - Uses default image if product image is missing
+- ✅ **Category Handling** - Gracefully handles products without categories
+- ✅ **Empty Store Handling** - Returns valid empty feed when no products exist
+
+#### 📊 Logging & Debugging
+- ✅ **Comprehensive Logging** - Added detailed error logging at appropriate levels
+- ✅ **Context Information** - Logs include product IDs and error details for debugging
+- ✅ **Production-Safe** - Error messages don't expose sensitive information to users
+- ✅ **Debug Support** - Detailed logs help troubleshoot production issues
+
+#### 🏗️ Code Quality Improvements
+- ✅ **Modular Architecture** - Separated concerns into dedicated helper methods
+- ✅ **PHPDoc Comments** - Added comprehensive documentation for all methods
+- ✅ **Code Readability** - Improved code organization and structure
+- ✅ **Best Practices** - Follows Laravel and Botble coding standards
+
+#### 🔧 Bug Fixes
+- 🐛 **Fixed** - Null pointer exception when accessing brand name on deleted brands
+- 🐛 **Fixed** - Null pointer exception when product URL cannot be generated
+- 🐛 **Fixed** - Error when product description is null or empty
+- 🐛 **Fixed** - Error when product has no image
+- 🐛 **Fixed** - Error when product has no categories
+- 🐛 **Fixed** - Error when currency is not configured
+- 🐛 **Fixed** - Silent failures during XML generation
+- 🐛 **Fixed** - Special characters breaking XML structure
+
+#### 📋 New Helper Methods
+- `addProductToFeed()` - Safely adds a single product to the feed
+- `getProductUrl()` - Gets product URL with fallback to homepage
+- `getBrandName()` - Gets brand name with fallback to "Unknown"
+- `getProductType()` - Gets product categories with error handling
+- `getProductImageUrl()` - Gets image URL with fallback to default
+- `escapeXml()` - Properly escapes XML content with correct flags
+
+#### 🎯 HTTP Response Improvements
+- ✅ **Proper Status Codes** - Returns appropriate HTTP status codes (404, 500)
+- ✅ **Content-Type Headers** - Correct content-type headers for all responses
+- ✅ **User-Friendly Messages** - Clear error messages for troubleshooting
+- ✅ **UTF-8 Response Headers** - Proper encoding in response headers
+
+---
+
+### Version 1.0.0 (2024-11-15) - Initial Release
+
+#### 🎉 Core Features
 - ✅ Initial release
 - ✅ Automatic Google Shopping XML feed generation
 - ✅ Admin settings panel with enable/disable toggle
@@ -195,6 +286,21 @@ SOFTWARE.
 - ✅ Image URL integration
 - ✅ Real-time product synchronization
 - ✅ Clean and SEO-friendly feed URL
+
+#### 📦 Product Data Support
+- ✅ Product ID, title, description
+- ✅ Product links and image links
+- ✅ Regular and sale prices
+- ✅ Brand information
+- ✅ Product categories (product_type)
+- ✅ Stock availability status
+- ✅ Product condition (new)
+
+#### ⚙️ Configuration
+- ✅ Simple enable/disable toggle
+- ✅ Settings panel in admin dashboard
+- ✅ Feed URL display in settings
+- ✅ Integration with Botble E-commerce
 
 ---
 
